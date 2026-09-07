@@ -1,85 +1,311 @@
-<div style="background-color: #0b0f19; padding: 30px; border-radius: 12px; max-width: 380px; margin: 30px auto; font-family: Arial, sans-serif; border: 1px solid #1f2937; box-shadow: 0 8px 24px rgba(0,0,0,0.8); color: #ffffff;">
-    
-    <!-- Başlıq -->
-    <h3 style="text-align: center; margin-bottom: 20px; font-size: 18px; font-weight: 600;">H&H login hizmet kapısı</h3>
-    
-    <!-- E-poçt, Şifrə Forması və Yönləndirmə -->
-    <form onsubmit="handleLogin(event)" style="display: flex; flex-direction: column; gap: 14px;">
-        <div>
-            <label style="display: block; color: #9ca3af; font-size: 13px; margin-bottom: 6px;">E-poçt ünvanı</label>
-            <input type="email" id="loginEmail" name="email" autocomplete="email" required placeholder="ad@example.com" style="width: 100%; padding: 11px; background-color: #111827; border: 1px solid #374151; color: #ffffff; border-radius: 6px; box-sizing: border-box; outline: none; font-size: 14px;">
-        </div>
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H&H login xidmət kapısı</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0b0f19;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #f3f4f6;
+            position: relative;
+        }
+        .lang-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 6px;
+        }
+        .lang-btn {
+            background-color: #111827;
+            border: 1px solid #374151;
+            color: #9ca3af;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+        .lang-btn:hover, .lang-btn.active {
+            background-color: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+        .login-card {
+            background-color: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 12px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        .login-card h2 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #e5e7eb;
+        }
+        .input-group {
+            text-align: left;
+            margin-bottom: 16px;
+        }
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            color: #9ca3af;
+            margin-bottom: 6px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px 12px;
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+        .captcha-box {
+            display: flex;
+            align-items: center;
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            justify-content: space-between;
+        }
+        .captcha-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .captcha-brand {
+            font-size: 10px;
+            color: #9ca3af;
+            text-align: right;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 10px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 16px;
+        }
+        .btn-submit:hover {
+            background-color: #1d4ed8;
+        }
+        .divider {
+            font-size: 11px;
+            color: #6b7280;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .btn-social {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #374151;
+            text-decoration: none;
+        }
+        .btn-google {
+            background-color: #ffffff;
+            color: #374151;
+        }
+        .btn-youtube {
+            background-color: #dc2626;
+            color: #ffffff;
+            border-color: #dc2626;
+        }
+        .hosting-info {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            font-size: 11px;
+            color: #9ca3af;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
 
-        <div>
-            <label style="display: block; color: #9ca3af; font-size: 13px; margin-bottom: 6px;">Şifrə</label>
-            <input type="password" id="loginPassword" name="password" autocomplete="current-password" required placeholder="••••••••" style="width: 100%; padding: 11px; background-color: #111827; border: 1px solid #374151; color: #ffffff; border-radius: 6px; box-sizing: border-box; outline: none; font-size: 14px;">
-        </div>
-
-        <!-- reCAPTCHA Simulyasiyası -->
-        <div style="background-color: #f9f9f9; border: 1px solid #d3d3d3; border-radius: 4px; padding: 10px; display: flex; align-items: center; justify-content: space-between; margin-top: 4px;">
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <input type="checkbox" required style="width: 20px; height: 20px; cursor: pointer;">
-                <span style="color: #000; font-size: 13px; font-weight: 500;">Mən robot deyiləm</span>
-            </div>
-            <div style="text-align: center;">
-                <div style="font-size: 10px; color: #555; font-weight: bold;">reCAPTCHA</div>
-                <div style="font-size: 8px; color: #555;">Privacy - Terms</div>
-            </div>
-        </div>
-
-        <!-- Göndər Düyməsi -->
-        <button type="submit" style="background-color: #2563eb; color: #ffffff; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px; transition: background 0.2s;">
-            Göndər
-        </button>
-    </form>
-
-    <!-- Ayırıcı Xətt -->
-    <div style="display: flex; align-items: center; margin: 20px 0; color: #4b5563; font-size: 12px;">
-        <div style="flex: 1; height: 1px; background: #374151;"></div>
-        <span style="padding: 0 10px;">və ya sosial hesab ilə</span>
-        <div style="flex: 1; height: 1px; background: #374151;"></div>
+    <!-- Dil Seçimi -->
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLanguage('az')">AZ</button>
+        <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="setLanguage('ru')">RU</button>
     </div>
 
-    <!-- Google və YouTube Giriş Düymələri -->
-    <div style="display: flex; flex-direction: column; gap: 10px;">
-        <a href="https://accounts.google.com/" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 10px; background-color: #ffffff; color: #3c4043; border: 1px solid #dadce0; padding: 10px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 13px;">
-            <img src="https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png" alt="Google" style="width: 18px; height: 18px;">
-            Google ilə daxil ol
-        </a>
-
-        <a href="https://www.youtube.com/" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 10px; background-color: #ff0000; color: #ffffff; border: none; padding: 10px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 13px;">
-            <svg style="width: 18px; height: 18px; fill: currentColor;" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            YouTube ilə daxil ol
-        </a>
-    </div>
-
-    <!-- PayPal İşarəsi / Dəstəyi -->
-    <div style="text-align: center; margin-top: 15px; font-size: 12px; color: #9ca3af; display: flex; align-items: center; justify-content: center; gap: 6px;">
-        <span>Ödəniş dəstəyi:</span>
-        <span style="color: #003087; font-weight: bold; background: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px;">PayPal</span>
-    </div>
-
-    <!-- Ən Altda İstədiyin Menyular -->
-    <div style="border-top: 1px solid #1f2937; margin-top: 20px; padding-top: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; font-size: 11px; color: #9ca3af;">
-        <span style="cursor: pointer;">Çərəzlər</span>
-        <span>•</span>
-        <span style="cursor: pointer;">H&H login</span>
-        <span>•</span>
-        <span style="cursor: pointer;">Key loots</span>
-        <span>•</span>
-        <span style="cursor: pointer;">Privacy server</span>
-    </div>
-
-</div>
-
-<script>
-    function handleLogin(event) {
-        event.preventDefault(); // Səhifənin yenilənməsinin qarşısını alır
+    <div class="login-card">
+        <h2 id="txt-title">H&H login xidmət kapısı</h2>
         
-        // Şifrənin yadda saxlanılması üçün bildirişin gəlməsi məqsədilə qısa gecikmə ilə yönləndiririk
-        setTimeout(function() {
-            window.location.href = "https://hhiletisim.github.io";
-        }, 400);
-    }
-      </script>
+        <form>
+            <div class="input-group">
+                <label id="txt-email">E-poçt ünvanı</label>
+                <input type="email" placeholder="ad@example.com" required>
+            </div>
+            
+            <div class="input-group">
+                <label id="txt-pass">Şifrə</label>
+                <input type="password" placeholder="••••••••" required>
+            </div>
 
+            <div class="captcha-box">
+                <div class="captcha-left">
+                    <input type="checkbox" required>
+                    <span id="txt-robot">Mən robot deyiləm</span>
+                </div>
+                <div class="captcha-brand">
+                    <b>reCAPTCHA</b><br>
+                    <span style="font-size: 9px;" id="txt-privacy">Məxfilik - Şərtlər</span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="txt-submit">Göndər</button>
+        </form>
+
+        <div class="divider" id="txt-or">və ya sosial hesabla daxil ol</div>
+
+        <button class="btn-social btn-google">
+            <span id="txt-google">Google ilə daxil ol</span>
+        </button>
+
+        <button class="btn-social btn-youtube">
+            <span id="txt-youtube">YouTube ilə daxil ol</span>
+        </button>
+
+        <div class="hosting-info">
+            <span id="txt-hosting">Ödəniş dəstəyi:</span> <b>PayPal</b>
+        </div>
+
+        <!-- Çerezlər və Digər Linklər -->
+        <div class="footer-links">
+            <a href="#" id="txt-cookies">Çerezlər</a>
+            <a href="#" id="txt-brand">H&H login</a>
+            <a href="#" id="txt-welcome">Xoş gəldiniz</a>
+            <a href="#" id="txt-server">Privacy server</a>
+        </div>
+
+        <!-- BEGIN AADS AD UNIT 2454649 -->
+        <div id="frame" style="width: 100%; margin: auto; position: relative; z-index: 99998; margin-top: 15px;">
+            <iframe data-aa='2454649' src='//acceptable.a-ads.com/2454649/?size=Adaptive' style='border:0; padding:0; width:70%; height:auto; overflow:hidden; display: block; margin: auto'></iframe>
+        </div>
+        <!-- END AADS AD UNIT 2454649 -->
+
+    </div>
+
+    <script>
+        const translations = {
+            az: {
+                title: "H&H login xidmət kapısı",
+                email: "E-poçt ünvanı",
+                pass: "Şifrə",
+                robot: "Mən robot deyiləm",
+                privacy: "Məxfilik - Şərtlər",
+                submit: "Göndər",
+                or: "və ya sosial hesabla daxil ol",
+                google: "Google ilə daxil ol",
+                youtube: "YouTube ilə daxil ol",
+                hosting: "Ödəniş dəstəyi:",
+                cookies: "Çerezlər",
+                brand: "H&H login",
+                welcome: "Xoş gəldiniz",
+                server: "Privacy server"
+            },
+            en: {
+                title: "H&H Login Portal",
+                email: "Email address",
+                pass: "Password",
+                robot: "I'm not a robot",
+                privacy: "Privacy - Terms",
+                submit: "Submit",
+                or: "or sign in with social account",
+                google: "Sign in with Google",
+                youtube: "Sign in with YouTube",
+                hosting: "Payment support:",
+                cookies: "Cookies",
+                brand: "H&H login",
+                welcome: "Welcome",
+                server: "Privacy server"
+            },
+            ru: {
+                title: "Портал входа H&H",
+                email: "Электронная почта",
+                pass: "Пароль",
+                robot: "Я не робот",
+                privacy: "Конфиденциальность - Условия",
+                submit: "Отправить",
+                or: "или войти через соцсети",
+                google: "Войти через Google",
+                youtube: "Войти через YouTube",
+                hosting: "Поддержка оплаты:",
+                cookies: "Куки",
+                brand: "H&H login",
+                welcome: "Добро пожаловать",
+                server: "Privacy server"
+            }
+        };
+
+        function setLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.getElementById('txt-title').innerText = translations[lang].title;
+            document.getElementById('txt-email').innerText = translations[lang].email;
+            document.getElementById('txt-pass').innerText = translations[lang].pass;
+            document.getElementById('txt-robot').innerText = translations[lang].robot;
+            document.getElementById('txt-privacy').innerText = translations[lang].privacy;
+            document.getElementById('txt-submit').innerText = translations[lang].submit;
+            document.getElementById('txt-or').innerText = translations[lang].or;
+            document.getElementById('txt-google').innerText = translations[lang].google;
+            document.getElementById('txt-youtube').innerText = translations[lang].youtube;
+            document.getElementById('txt-hosting').innerText = translations[lang].hosting;
+            document.getElementById('txt-cookies').innerText = translations[lang].cookies;
+            document.getElementById('txt-brand').innerText = translations[lang].brand;
+            document.getElementById('txt-welcome').innerText = translations[lang].welcome;
+            document.getElementById('txt-server').innerText = translations[lang].server;
+        }
+    </script>
+</body>
+</html>
