@@ -45,6 +45,7 @@
             box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
             text-align: center;
             position: relative;
+            box-sizing: border-box;
         }
         .lang-switcher {
             display: flex;
@@ -201,11 +202,10 @@
             text-decoration: underline;
         }
 
-        /* Sarı-Ağ İnşaat Lenti Çərçivəsi */
+        /* Sarı-Ağ İnşaat Lenti Çərçivəsi (Login içində) */
         .invite-box-container {
             width: 100%;
-            max-width: 400px;
-            margin: 15px auto 0 auto;
+            margin: 15px 0;
             padding: 4px;
             background: repeating-linear-gradient(
                 45deg,
@@ -218,15 +218,15 @@
             box-sizing: border-box;
         }
         .invite-box-inner {
-            background-color: #000000;
+            background-color: #0b0f19;
             border-radius: 9px;
-            padding: 15px;
+            padding: 12px;
             text-align: center;
         }
         .invite-box-inner h4 {
-            font-size: 13px;
+            font-size: 12px;
             color: #facc15;
-            margin: 0 0 10px 0;
+            margin: 0 0 8px 0;
         }
         .invite-input {
             width: 100%;
@@ -256,6 +256,32 @@
         }
         .invite-btn:hover {
             background-color: #eab308;
+        }
+
+        /* Toast Bildiriş Dizaynı */
+        #toast {
+            visibility: hidden;
+            min-width: 280px;
+            max-width: 380px;
+            background-color: #10b981;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 12px 16px;
+            position: fixed;
+            z-index: 99999;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 13px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+        }
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
         }
     </style>
 </head>
@@ -321,6 +347,15 @@
             <span id="txt-youtube">YouTube ilə daxil ol</span>
         </a>
 
+        <!-- LOGIN POPUP İÇƏRİSİNDƏKİ DAVƏT KODU YERİ -->
+        <div class="invite-box-container">
+            <div class="invite-box-inner">
+                <h4 id="txt-invite-title">🔒 Xüsusi Davet Kodu</h4>
+                <input type="text" id="inviteCode" class="invite-input" placeholder="Kodu daxil edin...">
+                <button type="button" class="invite-btn" onclick="checkInvite()" id="txt-invite-btn">Təsdiq et</button>
+            </div>
+        </div>
+
         <div class="hosting-info">
             <span id="txt-hosting">Ödəniş dəstəyi:</span> <b>PayPal</b>
         </div>
@@ -334,14 +369,8 @@
         <a href="#" id="txt-server">Privacy server</a>
     </div>
 
-    <!-- DÖRTBUCAQLI DAVƏT KODU YERİ (Sarı-Ağ İnşaat Lenti Çərçivəsində, Reklamın Üstündə) -->
-    <div class="invite-box-container">
-        <div class="invite-box-inner">
-            <h4>🔒 Xüsusi Davet Kodu</h4>
-            <input type="text" id="inviteCode" class="invite-input" placeholder="Kodu daxil edin...">
-            <button type="button" class="invite-btn" onclick="checkInvite()">Təsdiq et</button>
-        </div>
-    </div>
+    <!-- TOAST BİLDİRİŞ ELEMENTİ -->
+    <div id="toast">Davet kodu təsdiqləndi! Artıq e poçt ünvanınızı girip siteye giriş edin.</div>
 
     <!-- BEGIN AADS AD UNIT 2454649 (Ən altda, reklam) -->
     <div id="frame" style="width: 100%; max-width: 400px; margin: 15px auto 0 auto; position: relative; z-index: 99998;">
@@ -361,11 +390,14 @@
                 or: "və ya sosial hesabla daxil ol",
                 google: "Google ilə daxil ol",
                 youtube: "YouTube ilə daxil ol",
+                inviteTitle: "🔒 Xüsusi Davet Kodu",
+                inviteBtn: "Təsdiq et",
                 hosting: "Ödəniş dəstəyi:",
                 cookies: "Çerezlər",
                 brand: "H&H login",
                 welcome: "Xoş gəldiniz",
-                server: "Privacy server"
+                server: "Privacy server",
+                toastMsg: "Davet kodu təsdiqləndi! Artıq e poçt ünvanınızı girip siteye giriş edin."
             },
             en: {
                 title: "H&H Login Portal",
@@ -377,11 +409,14 @@
                 or: "or sign in with social account",
                 google: "Sign in with Google",
                 youtube: "Sign in with YouTube",
+                inviteTitle: "🔒 Special Invite Code",
+                inviteBtn: "Verify",
                 hosting: "Payment support:",
                 cookies: "Cookies",
                 brand: "H&H login",
                 welcome: "Welcome",
-                server: "Privacy server"
+                server: "Privacy server",
+                toastMsg: "Invite code verified! Now enter your email address to log in."
             },
             ru: {
                 title: "Портал входа H&H",
@@ -393,15 +428,21 @@
                 or: "или войти через соцсети",
                 google: "Войти через Google",
                 youtube: "Войти через YouTube",
+                inviteTitle: "🔒 Специальный инвайт-код",
+                inviteBtn: "Подтвердить",
                 hosting: "Поддержка оплаты:",
                 cookies: "Куки",
                 brand: "H&H login",
                 welcome: "Добро пожаловать",
-                server: "Privacy server"
+                server: "Privacy server",
+                toastMsg: "Инвайт-код подтвержден! Теперь введите адрес электронной почты для входа."
             }
         };
 
+        let currentLang = 'az';
+
         function setLanguage(lang) {
+            currentLang = lang;
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
 
@@ -414,17 +455,22 @@
             document.getElementById('txt-or').innerText = translations[lang].or;
             document.getElementById('txt-google').innerText = translations[lang].google;
             document.getElementById('txt-youtube').innerText = translations[lang].youtube;
+            document.getElementById('txt-invite-title').innerText = translations[lang].inviteTitle;
+            document.getElementById('txt-invite-btn').innerText = translations[lang].inviteBtn;
             document.getElementById('txt-hosting').innerText = translations[lang].hosting;
             document.getElementById('txt-cookies').innerText = translations[lang].cookies;
             document.getElementById('txt-brand').innerText = translations[lang].brand;
             document.getElementById('txt-welcome').innerText = translations[lang].welcome;
             document.getElementById('txt-server').innerText = translations[lang].server;
+            document.getElementById('toast').innerText = translations[lang].toastMsg;
         }
 
         function checkInvite() {
             const code = document.getElementById('inviteCode').value.trim();
             if (code === "201405") {
-                window.location.href = "https://hhiletisim.github.io";
+                const toast = document.getElementById("toast");
+                toast.className = "show";
+                setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 4000);
             } else {
                 window.location.href = "/404";
             }
