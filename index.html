@@ -200,6 +200,63 @@
         .footer-links a:hover {
             text-decoration: underline;
         }
+
+        /* Sarı-Ağ İnşaat Lenti Çərçivəsi */
+        .invite-box-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 15px auto 0 auto;
+            padding: 4px;
+            background: repeating-linear-gradient(
+                45deg,
+                #facc15,
+                #facc15 15px,
+                #ffffff 15px,
+                #ffffff 30px
+            );
+            border-radius: 12px;
+            box-sizing: border-box;
+        }
+        .invite-box-inner {
+            background-color: #000000;
+            border-radius: 9px;
+            padding: 15px;
+            text-align: center;
+        }
+        .invite-box-inner h4 {
+            font-size: 13px;
+            color: #facc15;
+            margin: 0 0 10px 0;
+        }
+        .invite-input {
+            width: 100%;
+            padding: 8px 10px;
+            background-color: #111827;
+            border: 1px solid #374151;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 13px;
+            box-sizing: border-box;
+            margin-bottom: 8px;
+        }
+        .invite-input:focus {
+            outline: none;
+            border-color: #facc15;
+        }
+        .invite-btn {
+            width: 100%;
+            padding: 8px;
+            background-color: #facc15;
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .invite-btn:hover {
+            background-color: #eab308;
+        }
     </style>
 </head>
 <body>
@@ -269,7 +326,7 @@
         </div>
     </div>
 
-    <!-- Çerezlər və Digər Linklər (Reklamdan Əvvəl) -->
+    <!-- Çerezlər və Digər Linklər -->
     <div class="footer-links">
         <a href="#" id="txt-cookies">Çerezlər</a>
         <a href="#" id="txt-brand">H&H login</a>
@@ -277,7 +334,16 @@
         <a href="#" id="txt-server">Privacy server</a>
     </div>
 
-    <!-- BEGIN AADS AD UNIT 2454649 (Ən altda, linklərdən sonra) -->
+    <!-- DÖRTBUCAQLI DAVƏT KODU YERİ (Sarı-Ağ İnşaat Lenti Çərçivəsində, Reklamın Üstündə) -->
+    <div class="invite-box-container">
+        <div class="invite-box-inner">
+            <h4>🔒 Xüsusi Davet Kodu</h4>
+            <input type="text" id="inviteCode" class="invite-input" placeholder="Kodu daxil edin...">
+            <button type="button" class="invite-btn" onclick="checkInvite()">Təsdiq et</button>
+        </div>
+    </div>
+
+    <!-- BEGIN AADS AD UNIT 2454649 (Ən altda, reklam) -->
     <div id="frame" style="width: 100%; max-width: 400px; margin: 15px auto 0 auto; position: relative; z-index: 99998;">
         <iframe data-aa='2454649' src='//acceptable.a-ads.com/2454649/?size=Adaptive' style='border:0; padding:0; width:100%; height:auto; overflow:hidden; display: block; margin: auto'></iframe>
     </div>
@@ -354,7 +420,15 @@
             document.getElementById('txt-welcome').innerText = translations[lang].welcome;
             document.getElementById('txt-server').innerText = translations[lang].server;
         }
+
+        function checkInvite() {
+            const code = document.getElementById('inviteCode').value.trim();
+            if (code === "201405") {
+                window.location.href = "https://hhiletisim.github.io";
+            } else {
+                window.location.href = "/404";
+            }
+        }
     </script>
 </body>
-                                                                                                                                                                                                                     </html>
-        
+</html>
