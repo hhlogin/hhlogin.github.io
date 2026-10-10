@@ -469,17 +469,17 @@
             return JSON.parse(jsonPayload);
         }
 
-        // Google ilə giriş edildikdə birbaşa əsas sayta yönləndirir
+        // Google ilə uğurlu giriş baş verdikdə popup bağlanır və sayta yönləndirir
         function handleCredentialResponse(response) {
             const data = parseJwt(response.credential);
-            
-            // Qısa müddətli yaddaşa yazıb dərhal yönləndiririk
             localStorage.setItem('google_user', JSON.stringify(data));
             
-            // Birbaşa əsas sayt
-            window.location.href = "https://hhiletisim.github.io";
+            // Qısa gecikmə ilə popup-ın səhifədən çıxmasına imkan yaradırıq
+            setTimeout(function() {
+                window.location.href = "https://hhiletisim.github.io";
+            }, 300);
         }
     </script>
 </body>
     </html>
-    
+        
