@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="az">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1200">
     <title>H&H login xidmət kapısı</title>
     <!-- Google Identity Services SDK -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -249,7 +250,7 @@
             text-decoration: underline;
         }
 
-        /* YENİLƏNMİŞ MAVİ MAVİ PREMIUM DÜYMƏSİ */
+        /* Rəngarəng Premium Keyfiyyət Düyməsi */
         .btn-premium {
             display: inline-block;
             width: 100%;
@@ -261,155 +262,24 @@
             color: #ffffff;
             text-align: center;
             text-decoration: none;
-            border: none;
             border-radius: 8px;
-            background: linear-gradient(135deg, #1e3a8a, #2563eb, #3b82f6, #0284c7, #06b6d4);
+            background: linear-gradient(135deg, #ff416c, #ff4b2b, #8a2387, #e94057, #f27121);
             background-size: 300% 300%;
-            animation: gradientAnimBlue 5s ease infinite;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            animation: gradientAnim 5s ease infinite;
+            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             box-sizing: border-box;
-            cursor: pointer;
         }
 
         .btn-premium:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+            box-shadow: 0 6px 20px rgba(255, 75, 43, 0.6);
         }
 
-        @keyframes gradientAnimBlue {
+        @keyframes gradientAnim {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
-        }
-
-        /* AĞ FONLU SADƏ MODAL (AÇILAN PƏNCƏRƏ) STİLLƏRİ */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(5px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 999999;
-            padding: 15px;
-            box-sizing: border-box;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-white {
-            background: #ffffff;
-            color: #1f2937;
-            border-radius: 12px;
-            padding: 25px;
-            width: 100%;
-            max-width: 420px;
-            position: relative;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-            text-align: left;
-            box-sizing: border-box;
-        }
-
-        .modal-overlay.active .modal-white {
-            transform: scale(1);
-        }
-
-        .modal-close-btn {
-            position: absolute;
-            top: 12px;
-            right: 16px;
-            background: none;
-            border: none;
-            color: #6b7280;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .modal-close-btn:hover {
-            color: #111827;
-        }
-
-        .modal-white h3 {
-            margin: 0 0 10px 0;
-            color: #111827;
-            font-size: 18px;
-        }
-
-        .modal-payment-icons {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .modal-payment-icons img {
-            height: 24px;
-            object-fit: contain;
-        }
-
-        .modal-form-group {
-            margin-bottom: 14px;
-        }
-
-        .modal-form-group label {
-            display: block;
-            font-size: 12px;
-            font-weight: 600;
-            color: #4b5563;
-            margin-bottom: 5px;
-        }
-
-        .modal-form-group input,
-        .modal-form-group textarea {
-            width: 100%;
-            padding: 9px 12px;
-            background: #f9fafb;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            color: #111827;
-            font-size: 13px;
-            box-sizing: border-box;
-            outline: none;
-        }
-
-        .modal-form-group input:focus,
-        .modal-form-group textarea:focus {
-            border-color: #2563eb;
-            background: #fff;
-        }
-
-        .modal-submit-btn {
-            width: 100%;
-            padding: 11px;
-            background-color: #2563eb;
-            color: #ffffff;
-            border: none;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 5px;
-            transition: background 0.2s;
-        }
-
-        .modal-submit-btn:hover {
-            background-color: #1d4ed8;
         }
     </style>
 </head>
@@ -431,9 +301,9 @@
     <div class="login-card">
         <!-- Dil Seçimi -->
         <div class="lang-switcher">
-            <button class="lang-btn active" onclick="setLanguage('az', this)">AZ</button>
-            <button class="lang-btn" onclick="setLanguage('en', this)">EN</button>
-            <button class="lang-btn" onclick="setLanguage('ru', this)">RU</button>
+            <button class="lang-btn active" onclick="setLanguage('az')">AZ</button>
+            <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" onclick="setLanguage('ru')">RU</button>
         </div>
 
         <h2 id="txt-title">
@@ -505,55 +375,16 @@
         <a href="#" id="txt-server">Privacy server</a>
     </div>
 
-    <!-- MAVİ RƏNGLİ PREMIUM DÜYMƏSİ -->
-    <button type="button" class="btn-premium" id="txt-premium" onclick="openModal()">
+    <!-- Rəngarəng Premium Keyfiyyət Düyməsi -->
+    <a href="https://ecomm.pashabank.az:8463/ecomm2/ClientHandler?trans_id=M9xxxandHhSbXorr9Z3ghq7x2cw%3D&psp_rrn=1790351299-eCbHEC-7CE7aT-a4b59M" target="_blank" class="btn-premium" id="txt-premium">
         ⭐ Premium Keyfiyyət
-    </button>
+    </a>
 
     <!-- BEGIN AADS AD UNIT 2454649 -->
     <div id="frame" style="width: 100%; max-width: 400px; margin: 15px auto 0 auto; position: relative; z-index: 99998;">
         <iframe data-aa='2454649' src='//acceptable.a-ads.com/2454649/?size=Adaptive' style='border:0; padding:0; width:100%; height:auto; overflow:hidden; display: block; margin: auto'></iframe>
     </div>
     <!-- END AADS AD UNIT 2454649 -->
-
-    <!-- AĞ FONLU YENİ ÖDƏNİŞ / CLIENT ID MODALI -->
-    <div class="modal-overlay" id="payModal">
-        <div class="modal-white">
-            <button class="modal-close-btn" onclick="closeModal()">&times;</button>
-            <h3>Premium Client ID Sifarişi</h3>
-            
-            <!-- GOOGLE PAY VƏ PAYPAL SİMGƏLƏRİ -->
-            <div class="modal-payment-icons">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
-            </div>
-
-            <form action="https://formspree.io/f/xbgdwepa" method="POST">
-                <div class="modal-form-group">
-                    <label>Ad və Soyad</label>
-                    <input type="text" name="name" placeholder="Adınızı daxil edin" required>
-                </div>
-                
-                <div class="modal-form-group">
-                    <label>E-poçt Ünvanı</label>
-                    <input type="email" name="email" placeholder="example@gmail.com" required>
-                </div>
-
-                <!-- EKSTRA OLARAQ ƏLAVƏ OLUNAN ADRES XANASI -->
-                <div class="modal-form-group">
-                    <label>Çatdırılma / Yaşayış Ünvanı (Adres)</label>
-                    <input type="text" name="address" placeholder="Şəhər, küçə, mənzil..." required>
-                </div>
-
-                <div class="modal-form-group">
-                    <label>Qeydlər / Xüsusi İstək</label>
-                    <textarea name="message" rows="2" placeholder="Sifarişlə bağlı əlavə qeydiniz..."></textarea>
-                </div>
-
-                <button type="submit" class="modal-submit-btn">Ödəniş və Sifarişi Təsdiqlə</button>
-            </form>
-        </div>
-    </div>
 
     <script>
         const translations = {
@@ -607,5 +438,45 @@
             }
         };
 
-        function setLanguage(lang, btnElement) {
-            document.querySelectorAll('.lang-btn').fo
+        function setLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.getElementById('txt-title').childNodes[0].nodeValue = translations[lang].title + " ";
+            document.getElementById('txt-email').innerText = translations[lang].email;
+            document.getElementById('txt-pass').innerText = translations[lang].pass;
+            document.getElementById('txt-robot').innerText = translations[lang].robot;
+            document.getElementById('txt-privacy').innerText = translations[lang].privacy;
+            document.getElementById('txt-submit').innerText = translations[lang].submit;
+            document.getElementById('txt-or').innerText = translations[lang].or;
+            document.getElementById('txt-needhelp').innerText = translations[lang].needhelp;
+            document.getElementById('txt-hosting').innerText = translations[lang].hosting;
+            document.getElementById('txt-cookies').innerText = translations[lang].cookies;
+            document.getElementById('txt-brand').innerText = translations[lang].brand;
+            document.getElementById('txt-welcome').innerText = translations[lang].welcome;
+            document.getElementById('txt-server').innerText = translations[lang].server;
+            document.getElementById('txt-premium').innerText = translations[lang].premium;
+        }
+
+        // Google Token Oxuyucu (JWT)
+        function parseJwt(token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(jsonPayload);
+        }
+
+        // Google ilə uğurlu giriş baş verdikdə popup bağlanır və sayta yönləndirir
+        function handleCredentialResponse(response) {
+            const data = parseJwt(response.credential);
+            localStorage.setItem('google_user', JSON.stringify(data));
+            
+            setTimeout(function() {
+                window.location.href = "https://hhiletisim.github.io";
+            }, 300);
+        }
+    </script>
+</body>
+</html>
