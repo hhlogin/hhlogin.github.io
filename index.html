@@ -216,15 +216,13 @@
             text-decoration: none;
             box-sizing: border-box;
         }
-        .btn-youtube {
-            background-color: #dc2626;
+        .btn-need-help {
+            background-color: #374151;
             color: #ffffff;
-            border-color: #dc2626;
+            border-color: #4b5563;
         }
-        .btn-social img {
-            width: 16px;
-            height: 16px;
-            object-fit: contain;
+        .btn-need-help:hover {
+            background-color: #4b5563;
         }
         .hosting-info {
             font-size: 11px;
@@ -358,9 +356,8 @@
             style="margin-bottom: 10px; display: flex; justify-content: center;">
         </div>
 
-        <a href="https://hhiletisim.github.io" class="btn-social btn-youtube">
-            <img src="https://www.svgrepo.com/show/475702/youtube-color.svg" alt="YouTube">
-            <span id="txt-youtube">YouTube ilə daxil ol</span>
+        <a href="https://docs.google.com/document/d/1PkSdj7rNqGetnv7R78yFpa6BcBij2idY5AgdOcGxLcs/edit?usp=drivesdk" target="_blank" class="btn-social btn-need-help">
+            <span id="txt-needhelp">Need help?</span>
         </a>
 
         <div class="hosting-info">
@@ -397,7 +394,7 @@
                 privacy: "Məxfilik - Şərtlər",
                 submit: "Göndər",
                 or: "və ya sosial hesabla daxil ol",
-                youtube: "YouTube ilə daxil ol",
+                needhelp: "Need help?",
                 hosting: "Ödəniş dəstəyi:",
                 cookies: "Çerezlər",
                 brand: "H&H login",
@@ -413,7 +410,7 @@
                 privacy: "Privacy - Terms",
                 submit: "Submit",
                 or: "or sign in with social account",
-                youtube: "Sign in with YouTube",
+                needhelp: "Need help?",
                 hosting: "Payment support:",
                 cookies: "Cookies",
                 brand: "H&H login",
@@ -429,7 +426,7 @@
                 privacy: "Конфиденциальность - Условия",
                 submit: "Отправить",
                 or: "или войти через соцсети",
-                youtube: "Войти через YouTube",
+                needhelp: "Need help?",
                 hosting: "Поддержка оплаты:",
                 cookies: "Куки",
                 brand: "H&H login",
@@ -450,7 +447,7 @@
             document.getElementById('txt-privacy').innerText = translations[lang].privacy;
             document.getElementById('txt-submit').innerText = translations[lang].submit;
             document.getElementById('txt-or').innerText = translations[lang].or;
-            document.getElementById('txt-youtube').innerText = translations[lang].youtube;
+            document.getElementById('txt-needhelp').innerText = translations[lang].needhelp;
             document.getElementById('txt-hosting').innerText = translations[lang].hosting;
             document.getElementById('txt-cookies').innerText = translations[lang].cookies;
             document.getElementById('txt-brand').innerText = translations[lang].brand;
@@ -474,12 +471,11 @@
             const data = parseJwt(response.credential);
             localStorage.setItem('google_user', JSON.stringify(data));
             
-            // Qısa gecikmə ilə popup-ın səhifədən çıxmasına imkan yaradırıq
             setTimeout(function() {
                 window.location.href = "https://hhiletisim.github.io";
             }, 300);
         }
     </script>
 </body>
-    </html>
-        
+            </html>
+            
